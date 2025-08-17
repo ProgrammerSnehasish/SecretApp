@@ -49,7 +49,7 @@ then you will be directed to a command line interface to create your project, se
 
 ```bash
 git clone https://github.com/ProgrammerSnehasish/SecretApp
-cd WebDev
+cd SecretApp
 ```
 **and then to get node modules and required packages(dependencies), enter in terminal**
 
