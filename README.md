@@ -1,4 +1,4 @@
-# WebDev
+# Secret App
 This is a practice Repository on Web Development Learning. It is a modern Web Development project built with [Vite](https://vitejs.dev/), [React](https://reactjs.org/), and [TypeScript](https://www.typescriptlang.rog/).
 
 ---
@@ -48,7 +48,7 @@ then you will be directed to a command line interface to create your project, se
 ### Clone the repo
 
 ```bash
-git clone https://github.com/ProgrammerSnehasish/WebDev
+git clone https://github.com/ProgrammerSnehasish/SecretApp
 cd WebDev
 ```
 **and then to get node modules and required packages(dependencies), enter in terminal**
@@ -81,4 +81,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Thanks to Vite, React, and the open-source community!
 
 ---
-**Maintainer: Snehasish Das, Amit Pramanik**
+**Maintainer: Snehasish Das**
