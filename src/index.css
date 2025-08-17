@@ -1,0 +1,56 @@
+#root {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100dvh;
+}
+
+/*Html: <span class="loader"></span>*/
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  background: linear-gradient(0deg, rgba(255, 61, 0, 0.2) 33%, #ff3d00 100%);
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #263238;
+}
+@keyframes rotation {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg)}
+}
+
+/*Html: <div class="progress"></div>*/
+.progress {
+   width: 100.8px;
+   height: 16.8px;
+   background: linear-gradient(#474bff 0 0) left/0% 100% no-repeat
+       #dbdcef;
+   animation: progress-jgv380 2s infinite linear;
+}
+
+@keyframes progress-jgv380 {
+   100% {
+      background-size: 100% 100%;
+   }
+}
