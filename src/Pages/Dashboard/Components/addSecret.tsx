@@ -62,7 +62,7 @@ export default function AddSecret() {
 function SecretList() {
     const secretList = useSecretStore((store) => store.secretList);
     return (
-        <div>
+        <div style={{paddingTop: 12}}>
             {secretList.map((item) => (
                 <SecretItem item={item} />
             ))}

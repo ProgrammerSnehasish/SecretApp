@@ -1,11 +1,11 @@
 import { create } from "zustand";
 import type { AddSecretResponse } from "../api/types";
 
-// export interface ISecret{
-//     id: number,
-//     title: string,
-//     value: string
-// }
+export interface ISecret{
+    id: number,
+    title: string,
+    value: string
+}
 
 interface ISecretStore {
     secretList: AddSecretResponse[],

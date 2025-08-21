@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSecretStore } from "../../store/SecretStore";
 import { api } from "../axiosApiConfig";
-import type { AddSecretResponse } from "../types";
+import type { AddSecretResponse, ApiRespone } from "../types";
 
 export default function usePostApi() {
     const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ export default function usePostApi() {
     async function createSecret(title: string, value: string) {
         setLoading(true)
         try {
-                const res = await api.post<{ message: AddSecretResponse, statusCode: number }>('/secret/add', {
+                const res = await api.post<ApiRespone<AddSecretResponse>>('/secret/add', {
                     title: title,
                     value: value
                 })

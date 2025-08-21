@@ -14,7 +14,7 @@ interface IUserStore {
     user?: IUser,
     secret: ISecret[],
     setUser: (user: IUser | undefined) => void;
-    addNew: (secret: ISecret) => void;
+    // getUserByToken(token: string): any;
 }
 
 export const useUserStore = create<IUserStore>((set) => ({
@@ -22,8 +22,15 @@ export const useUserStore = create<IUserStore>((set) => ({
     secret: [],
     setUser: (user?: IUser) => {
         set({ user });
-    },
-    addNew: (secret: ISecret) => {
-        set((store) => ({ secret: [...store.secret, secret] }));
     }
+    // getUserByToken: (token?: string) =>{
+    //         if(token){
+    //             const user = useUserStore.getState().user;
+    //             if(user && user.token === token){
+    //                 return user;
+    //             } else {
+    //                 return undefined;
+    //             }
+    //         }
+    //     }
 }))

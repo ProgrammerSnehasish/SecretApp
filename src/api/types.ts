@@ -12,3 +12,8 @@ export interface AddSecretResponse {
         "lastName": string
     }
 }
+
+export interface ApiRespone<T> {
+    message: T,
+    statusCode: number
+}
