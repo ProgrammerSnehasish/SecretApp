@@ -3,6 +3,7 @@ import type { SecretResponse } from "../../../api/post/post.types";
 import usePostApi from "../../../api/post/usePostApi";
 import Progress from "../../../components/Progress";
 import Pagination from "../../../components/Pagination";
+import { useSecretStore} from "../../../store/secretStore";
 // import { useSecretStore } from "../../../store/SecretStore";
 
 export function SecretList() {
@@ -16,7 +17,7 @@ export function SecretList() {
     async function fetchSecrets(pg = page) {
         const data = await getSecrets(pg, take);
         if(data){
-            setSecretList(data.data.slice().reverse());
+            setSecretList(data.data);
             setCount(data.count);
         }
     }
@@ -44,12 +45,11 @@ interface ISecretItemProps {
 
 function SecretItem({ item }: ISecretItemProps) {
     // const setSelectedSecret = useSecretStore((store) => store.setSelectedSecret)
+    const setSelectedSecret = useSecretStore((store)=>store.setSecret)
     return (
-        <div key={item.id} style={{ marginBottom: 12, padding: 8, border: '1px solid', cursor: 'pointer' }}>
+        <div key={item.id} onClick={()=>setSelectedSecret(item.id)}style={{ marginBottom: 12, padding: 8, border: '1px solid', cursor: 'pointer' }}>
             <p>Title: {item.title}</p>
             <p>Secret: {item.Value}</p>
         </div>
     );
 }
-
-// onClick={() => setSelectedSecret(item)}
