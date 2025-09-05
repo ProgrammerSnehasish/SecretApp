@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { api } from "../axiosApiConfig";
 import { useUserStore, type IUser } from "../../store/UserStore";
-import type { ApiRespone } from "../types";
+import type { ApiResponse } from "../types";
 
 export default function useAuthApi() {
     const [loading, setLoading] = useState(false);
@@ -10,7 +10,7 @@ export default function useAuthApi() {
     async function login(email: string, password: string) {
         setLoading(true)
         try {
-                const result = await api.post<ApiRespone<IUser>>('/auth/login', {
+                const result = await api.post<ApiResponse<IUser>>('/auth/login', {
                     email: email,
                     password: password
                 })
@@ -29,7 +29,7 @@ export default function useAuthApi() {
     async function signup(email: string, password: string, firstName: string, lastName: string) {
         setLoading(true)
         try {
-            const result = await api.post<ApiRespone<void>>('/auth/signup', {
+            const result = await api.post<ApiResponse<void>>('/auth/signup', {
                 email: email,
                 password: password,
                 firstName: firstName,

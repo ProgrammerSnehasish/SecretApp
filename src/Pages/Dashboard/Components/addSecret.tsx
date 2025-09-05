@@ -1,6 +1,4 @@
 import { Controller, useForm } from "react-hook-form";
-import { useSecretStore } from "../../../store/SecretStore";
-import type { AddSecretResponse } from "../../../api/types";
 import usePostApi from "../../../api/post/usePostApi";
 import Progress from "../../../components/Progress";
 
@@ -18,7 +16,6 @@ export default function AddSecret() {
         <>
             {loading && <Progress />}
             <div style={{ height: '100%', width: '100%' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 12 }}>
                     <form onSubmit={handleSubmit(async (data) => {
                         createSecret(data.title, data.value)
                         reset({
@@ -53,31 +50,7 @@ export default function AddSecret() {
 
                     </form>
                 </div>
-                <SecretList />
-            </div>
         </>
     );
 }
 
-function SecretList() {
-    const secretList = useSecretStore((store) => store.secretList);
-    return (
-        <div style={{paddingTop: 12}}>
-            {secretList.map((item) => (
-                <SecretItem item={item} />
-            ))}
-        </div>
-    );
-}
-interface ISecretItemProps {
-    item: AddSecretResponse;
-}
-function SecretItem({ item }: ISecretItemProps) {
-    const setSelectedSecret = useSecretStore((store) => store.setSelectedSecret)
-    return (
-        <div key={item.id} style={{ marginBottom: 12, padding: 8, border: '1px solid', cursor: 'pointer' }} onClick={() => setSelectedSecret(item)}>
-            <p>Title: {item.title}</p>
-            <p>Secret: {item.Value}</p>
-        </div>
-    );
-}
