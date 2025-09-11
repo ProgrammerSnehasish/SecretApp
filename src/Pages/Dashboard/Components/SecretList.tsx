@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import type { SecretResponse } from "../../../api/post/post.types";
 import usePostApi from "../../../api/post/usePostApi";
-import Progress from "../../../components/Progress";
 import Pagination from "../../../components/Pagination";
 import { useSecretStore} from "../../../store/secretStore";
+import Loading from "../../../components/Loading";
 // import { useSecretStore } from "../../../store/SecretStore";
 
 export function SecretList() {
@@ -28,7 +28,7 @@ export function SecretList() {
 
     return (
         <div style={{paddingTop: 12}}>
-            {loading && <Progress />}
+            {loading && <Loading />}
 
             {secretList.map((item) => (
                 <SecretItem key={item.id} item={item} />
