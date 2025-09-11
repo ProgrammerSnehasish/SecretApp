@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import usePostApi from "../../../api/post/usePostApi";
 import { useSecretStore } from "../../../store/secretStore";
+import Loading from "../../../components/Loading";
 
 
 export default function SecretDetails() {
@@ -12,8 +13,10 @@ export default function SecretDetails() {
    } 
  },[id])
     return (
-        <div>
-            {secret ? (
+        <>  
+            {loading ? 
+            (<div style={{display: "flex",flex: 1,position: "relative"}}><Loading /></div>) :
+            secret ? (
                 <>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 20 }}>
                         <h3>{secret.title}</h3>
@@ -23,7 +26,7 @@ export default function SecretDetails() {
             ) : (
                 <p>No item Selected.</p>
             )}
-        </div>
+        </>
     )
 }
 
