@@ -2,7 +2,6 @@ import { Controller, useForm } from "react-hook-form";
 import DisplayPassword from "../../../components/DispalyPassword";
 import useAuthApi from "../../../api/auth/useAuthApi";
 import Loading from "../../../components/Loading";
-import { Toaster } from "sonner";
 
 export default function SignupForm() {
     const { control, handleSubmit } = useForm({
@@ -76,7 +75,7 @@ export default function SignupForm() {
                         return <input type='text' placeholder="Enter last name..." onChange={(e) => onChange(e.target.value)} {...rest} />
                     }}
                 />
-                <Toaster />
+
                 <button type="submit" style={{ cursor: 'pointer' }}>Sign up</button>
             </form>
         </>

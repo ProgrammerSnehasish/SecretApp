@@ -4,7 +4,6 @@ import usePostApi from "../../../api/post/usePostApi";
 import Pagination from "../../../components/Pagination";
 import { useSecretStore} from "../../../store/secretStore";
 import Loading from "../../../components/Loading";
-import { Toaster } from "sonner";
 
 export function SecretList() {
     const {getSecrets, secretList, loading} = usePostApi();
@@ -17,7 +16,6 @@ export function SecretList() {
 
     return (
         <>
-            <Toaster />
             <div style={{paddingTop: 12}}>
                 {loading && <Loading />}
 

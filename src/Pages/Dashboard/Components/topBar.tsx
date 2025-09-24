@@ -1,4 +1,3 @@
-import { Toaster } from "sonner";
 import useAuthApi from "../../../api/auth/useAuthApi";
 import { useUserStore } from "../../../store/UserStore";
 
@@ -8,7 +7,6 @@ export default function TopBar() {
 
     return (
         <>
-            <Toaster />
             <div style={{paddingLeft: 12, paddingRight: 12, paddingTop: 6, paddingBottom: 6, backgroundColor: '#f5ededff', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
             <div style={{height: 46, width: 46}}>
                 <img src="./src/assets/secret_locker_icon.png" alt="secret_locker_icon" height="50" width="50" />

@@ -2,7 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 import useAuthApi from "../../../api/auth/useAuthApi";
 import DisplayPassword from "../../../components/DispalyPassword";
 import Loading from "../../../components/Loading";
-import { Toaster } from "sonner";
+
 
 export default function LoginForm() {
     const { control, handleSubmit } = useForm({
@@ -55,7 +55,7 @@ export default function LoginForm() {
                         }
                     }}
                 />
-                <Toaster />
+
                 <button type="submit" style={{ cursor: 'pointer', width: 60 }}>Login</button>
             </form>
         </>

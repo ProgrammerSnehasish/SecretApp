@@ -1,7 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import usePostApi from "../../../api/post/usePostApi";
 import Progress from "../../../components/Progress";
-import { Toaster } from "sonner";
 
 export default function AddSecret({onAdd}: {onAdd: ()=>void}) {
 
@@ -47,7 +46,6 @@ export default function AddSecret({onAdd}: {onAdd: ()=>void}) {
                                 required: "Secret value is required"
                             }}
                         />
-                        <Toaster />
                         <button type="submit" style={{ cursor: 'pointer' }}><img src="./src/assets/add-new.png" style={{ height: '14px', width: '100%' }} /></button>
                     </form>
                 </div>
