@@ -1,8 +1,9 @@
 import { Controller, useForm } from "react-hook-form";
 import usePostApi from "../../../api/post/usePostApi";
 import Progress from "../../../components/Progress";
+import { Toaster } from "sonner";
 
-export default function AddSecret() {
+export default function AddSecret({onAdd}: {onAdd: ()=>void}) {
 
     const { control, handleSubmit, reset } = useForm({
         values: {
@@ -17,11 +18,12 @@ export default function AddSecret() {
             {loading && <Progress />}
             <div style={{ height: '100%', width: '100%' }}>
                     <form onSubmit={handleSubmit(async (data) => {
-                        createSecret(data.title, data.value)
+                        await createSecret(data.title, data.value)
                         reset({
                             title: '',
                             value: ''
                         });
+                        onAdd();
                     })} style={{ display: 'flex', flexDirection: 'row' }}>
 
                         <Controller
@@ -45,9 +47,8 @@ export default function AddSecret() {
                                 required: "Secret value is required"
                             }}
                         />
-
+                        <Toaster />
                         <button type="submit" style={{ cursor: 'pointer' }}><img src="./src/assets/add-new.png" style={{ height: '14px', width: '100%' }} /></button>
-
                     </form>
                 </div>
         </>

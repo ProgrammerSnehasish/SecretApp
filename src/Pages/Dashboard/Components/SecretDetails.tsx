@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import usePostApi from "../../../api/post/usePostApi";
 import { useSecretStore } from "../../../store/secretStore";
 import Loading from "../../../components/Loading";
+import { Toaster } from "sonner";
 
 
 export default function SecretDetails() {
@@ -14,6 +15,7 @@ export default function SecretDetails() {
  },[id])
     return (
         <>  
+            <Toaster />
             {loading ? 
             (<div style={{display: "flex",flex: 1,position: "relative"}}><Loading /></div>) :
             secret ? (

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { api } from "../axiosApiConfig";
 import { useUserStore, type IUser } from "../../store/UserStore";
 import type { ApiResponse } from "../types";
+import { LocalStorageItems } from "../../configs/config";
+import { toast } from "sonner";
 
 export default function useAuthApi() {
     const [loading, setLoading] = useState(false);
@@ -10,17 +12,16 @@ export default function useAuthApi() {
     async function login(email: string, password: string) {
         setLoading(true)
         try {
-                const result = await api.post<ApiResponse<IUser>>('/auth/login', {
+                const {data: {message: user}} = await api.post<ApiResponse<IUser>>('/auth/login', {
                     email: email,
                     password: password
                 })
-                setUser(result.data.message)
-                localStorage.setItem('token', result.data.message.token);
-                if (result.status === 201) {
-                    alert("Login successful!");
-                }
+                setUser(user)
+                localStorage.setItem(LocalStorageItems.TOKEN, user.token);
+                localStorage.setItem(LocalStorageItems.EXPIRES_AT, user.expiresAt);
+                toast.success("Login successful!");
             } catch (error: any) {
-                alert("Login failed: " + error.response.data.message);
+                toast.error("Login failed: " + error);
             } finally {
                 setLoading(false);
             }
@@ -36,10 +37,10 @@ export default function useAuthApi() {
                 lastName: lastName
             })
             if (result.status === 201) {
-                alert("Signup successful! Please login.");
+                toast.success("Signup successful! Please login.");
             }
         } catch (error: any) {
-            alert("Signup failed: " + error.response.data.message);
+            toast.error("Signup failed: " + error.response.data.message);
         } finally {
             setLoading(false);
         }
@@ -48,7 +49,7 @@ export default function useAuthApi() {
     function logout() {
         setUser(undefined),
         localStorage.clear(),
-        alert("Logged out successfully!");
+        toast.success("Logged out successfully!");
     }
 
     return {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { api } from "../axiosApiConfig";
 import type { ApiResponse } from "../types";
 import type { PaginatedSecretResponse, SecretResponse } from "./post.types";
+import { toast } from "sonner";
 
 export default function usePostApi() {
     const [loading, setLoading] = useState(false);
@@ -15,10 +16,9 @@ export default function usePostApi() {
                 title: title,
                 value: value
             })
-            await getSecrets(1, 10);
         } catch (error: any) {
             console.error("Error adding secret:", error);
-            alert("Failed to add secret: " + error.message);
+            toast.error("Failed to add secret: " + error.message);
         } finally {
             setLoading(false)
         }
@@ -30,7 +30,7 @@ export default function usePostApi() {
                 const res = await api.get<ApiResponse<SecretResponse>>(`/secret?id=${id}`);
                 setSecret(res.data.message);
             } catch (error: any) {
-                alert(error.message);
+                toast.error(error.message);
             } finally {
                 setLoading(false)
             }
@@ -43,7 +43,7 @@ export default function usePostApi() {
             setSecretList(res.data.message);
             return res.data.message;
         }catch(error: any){
-            alert(error.message);
+            toast.error(error.message);
         }finally{
             setLoading(false)
         }

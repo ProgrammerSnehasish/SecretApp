@@ -4,38 +4,30 @@ import usePostApi from "../../../api/post/usePostApi";
 import Pagination from "../../../components/Pagination";
 import { useSecretStore} from "../../../store/secretStore";
 import Loading from "../../../components/Loading";
-// import { useSecretStore } from "../../../store/SecretStore";
+import { Toaster } from "sonner";
 
 export function SecretList() {
-    // const secretList = useSecretStore((store) => store.secretList);
-    const {getSecrets, loading} = usePostApi();
-    const [secretList, setSecretList] = useState<SecretResponse[]>([]);
-    const [count, setCount] = useState(0);
+    const {getSecrets, secretList, loading} = usePostApi();
     const [page, setPage] = useState(1);
     const take = 10; // items per page
 
-    async function fetchSecrets(pg = page) {
-        const data = await getSecrets(pg, take);
-        if(data){
-            setSecretList(data.data);
-            setCount(data.count);
-        }
-    }
-
     useEffect(() => {
-        fetchSecrets(page);
+        getSecrets(page, take);
     }, [page]);
 
     return (
-        <div style={{paddingTop: 12}}>
-            {loading && <Loading />}
+        <>
+            <Toaster />
+            <div style={{paddingTop: 12}}>
+                {loading && <Loading />}
 
-            {secretList.map((item) => (
-                <SecretItem key={item.id} item={item} />
-            ))}
+                {secretList?.data.map((item) => (
+                    <SecretItem key={item.id} item={item} />
+                ))}
 
-            <Pagination total={count} take={take} currentPage={page} onPageChange={setPage} />
-        </div>
+                <Pagination total={secretList?.count ?? 0} take={take} currentPage={page} onPageChange={setPage} />
+            </div>
+        </>
     );
 }
 
@@ -44,10 +36,10 @@ interface ISecretItemProps {
 }
 
 function SecretItem({ item }: ISecretItemProps) {
-    // const setSelectedSecret = useSecretStore((store) => store.setSelectedSecret)
     const setSelectedSecret = useSecretStore((store)=>store.setSecret)
+    const selectedSecretId = useSecretStore((store)=>store.selectedSecretId)
     return (
-        <div key={item.id} onClick={()=>setSelectedSecret(item.id)}style={{ marginBottom: 12, padding: 8, border: '1px solid', cursor: 'pointer' }}>
+        <div key={item.id} onClick={()=>setSelectedSecret(item.id)}style={{ marginBottom: 12, padding: 8, border: selectedSecretId===item.id ? '3px solid' : '1px solid',backgroundColor: selectedSecretId===item.id ? '#13abf1ff' : '#ffffffff', cursor: 'pointer' }}>
             <p>Title: {item.title}</p>
             <p>Secret: {item.Value}</p>
         </div>
