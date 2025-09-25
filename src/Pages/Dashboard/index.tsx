@@ -1,16 +1,16 @@
-import SecretDetails from "./Components/SecretDetails"
-import SecretListArea from "./Components/SecretListArea"
+import SecretDetails from "./Components/Secret_Details_Area/SecretDetails"
+import SecretListArea from "./Components/Secret_List_Area/SecretListArea"
 import TopBar from "./Components/topBar"
 
 export default function DashboardPage() {
-    return(
-        <div style={{ height: '100%', display: 'flex', flexDirection: 'column'}}>
+    return (
+        <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <TopBar />
-            <div style={{border: '1px solid #beb3b3ff', flex: 1, display: 'flex', flexDirection: 'row'}}>
+            <div style={{ border: '1px solid #beb3b3ff', flex: 1, display: 'flex', flexDirection: 'row' }}>
                 {/* Left Column */}
                 <SecretListArea />
                 {/* Right Column */}
-                <div style={{height: '100%', width: "100%", justifyContent: 'center',display: 'flex'}}>
+                <div style={{ height: '100%', width: "100%", justifyContent: 'center', display: 'flex' }}>
                     <SecretDetails />
                 </div>
             </div>

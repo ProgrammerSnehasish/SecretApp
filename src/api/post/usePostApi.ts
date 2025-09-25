@@ -49,12 +49,42 @@ export default function usePostApi() {
         }
     }
 
+    async function updateSecret(id: string, title: string, value: string) {
+        setLoading(true)
+        try {
+            await api.post<ApiResponse<SecretResponse>>('/secret/update', {
+                id: id,
+                title: title,
+                value: value
+            })
+        } catch (error: any) {
+            console.error("Error updating secret:", error);
+            toast.error("Failed to update secret: " + error.message);
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    async function deleteSecret(id: string) {
+        setLoading(true)
+        try {
+            await api.delete<ApiResponse<null>>(`/secret/remove?id=${id}`);
+        } catch (error: any) {
+            console.error("Error deleting secret:", error);
+            toast.error("Failed to delete secret: " + error.message);
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return {
         loading,
         secret,
         secretList,
         createSecret,
         getSecretById,
-        getSecrets
+        getSecrets,
+        updateSecret,
+        deleteSecret
     }
 }
