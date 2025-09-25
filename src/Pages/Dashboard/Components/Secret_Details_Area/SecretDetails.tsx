@@ -14,7 +14,7 @@ export default function SecretDetails() {
     return (
         <>
             {loading ?
-                (<div style={{ display: "flex", flex: 1, position: "relative" }}><Loading /></div>) :
+                (<div style={{ display: "flex", flex: 1, position: "relative",justifyContent: "center"}}><Loading /></div>) :
                 secret ? (
                     <>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 20 }}>
