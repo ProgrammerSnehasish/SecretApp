@@ -3,11 +3,12 @@ import { api } from "../axiosApiConfig";
 import type { ApiResponse } from "../types";
 import type { PaginatedSecretResponse, SecretResponse } from "./post.types";
 import { toast } from "sonner";
+import { useSecretStore } from "../../store/secretStore";
 
 export default function usePostApi() {
     const [loading, setLoading] = useState(false);
     const [secret, setSecret] = useState<SecretResponse>();
-    const [secretList, setSecretList] = useState<PaginatedSecretResponse>();
+    const setSecretList = useSecretStore((store) => store.setSecretList);
 
     async function createSecret(title: string, value: string) {
         setLoading(true)
@@ -27,24 +28,24 @@ export default function usePostApi() {
     async function getSecretById(id: string) {
         setLoading(true)
         try {
-                const res = await api.get<ApiResponse<SecretResponse>>(`/secret?id=${id}`);
-                setSecret(res.data.message);
-            } catch (error: any) {
-                toast.error(error.message);
-            } finally {
-                setLoading(false)
-            }
+            const res = await api.get<ApiResponse<SecretResponse>>(`/secret?id=${id}`);
+            setSecret(res.data.message);
+        } catch (error: any) {
+            toast.error(error.message);
+        } finally {
+            setLoading(false)
+        }
     }
 
     async function getSecrets(page: number, take: number) {
         setLoading(true)
-        try{
+        try {
             const res = await api.get<ApiResponse<PaginatedSecretResponse>>(`/secret/all?page=${page}&take=${take}`);
             setSecretList(res.data.message);
             return res.data.message;
-        }catch(error: any){
+        } catch (error: any) {
             toast.error(error.message);
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
@@ -57,6 +58,8 @@ export default function usePostApi() {
                 title: title,
                 value: value
             })
+            await getSecrets(1, 10);
+            toast.success("Secret updated successfully");
         } catch (error: any) {
             console.error("Error updating secret:", error);
             toast.error("Failed to update secret: " + error.message);
@@ -69,6 +72,8 @@ export default function usePostApi() {
         setLoading(true)
         try {
             await api.delete<ApiResponse<null>>(`/secret/remove?id=${id}`);
+            await getSecrets(1, 10);
+            toast.success("Secret deleted successfully");
         } catch (error: any) {
             console.error("Error deleting secret:", error);
             toast.error("Failed to delete secret: " + error.message);
@@ -80,7 +85,6 @@ export default function usePostApi() {
     return {
         loading,
         secret,
-        secretList,
         createSecret,
         getSecretById,
         getSecrets,

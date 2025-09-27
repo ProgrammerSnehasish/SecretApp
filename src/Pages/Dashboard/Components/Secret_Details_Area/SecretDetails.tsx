@@ -16,14 +16,14 @@ export default function SecretDetails() {
     return (
         <>
             {loading ?
-                (<div style={{ display: "flex", flex: 1, position: "relative"}}><Loading /></div>) :
-                secret ? (
+                (<div style={{ display: "flex", flex: 1, position: "relative" }}><Loading /></div>) :
+                (secret && id) ? (
                     <>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 20 }}>
                             <h3>{secret.title}</h3>
                             <p>{secret.Value}</p>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: 6 }}>
-                                <EditSecret id={secret.id} title={secret.title} value={secret.Value} />
+                                <EditSecret id={secret.id} title={secret.title} value={secret.Value} onComplete={() => { getSecretById(id as string); }} />
                                 <DeleteSecret id={secret.id} />
                             </div>
                         </div>

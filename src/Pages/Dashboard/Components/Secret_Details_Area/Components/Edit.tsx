@@ -6,6 +6,7 @@ interface IEditSecretProps {
   id: string;
   title: string;
   value: string;
+  onComplete: () => void;
 }
 
 interface IFormValues {
@@ -13,7 +14,7 @@ interface IFormValues {
   value: string;
 }
 
-export default function EditSecret({ id, title, value }: IEditSecretProps) {
+export default function EditSecret({ id, title, value, onComplete }: IEditSecretProps) {
   const { updateSecret } = usePostApi();
   const [open, setOpen] = useState(false);
 
@@ -40,6 +41,7 @@ export default function EditSecret({ id, title, value }: IEditSecretProps) {
   const onSave = async (data: IFormValues) => {
     await updateSecret(id, data.title, data.value);
     // keep form synced with saved values
+    onComplete()
     reset({ title: data.title, value: data.value });
     setOpen(false);
   };

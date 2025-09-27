@@ -6,7 +6,8 @@ import type { SecretResponse } from "../../../../../api/post/post.types";
 import { useSecretStore } from "../../../../../store/secretStore";
 
 export function SecretList() {
-    const { getSecrets, secretList, loading } = usePostApi();
+    const { getSecrets, loading } = usePostApi();
+    const secretList = useSecretStore((store) => store.secretList)
     const [page, setPage] = useState(1);
     const take = 10; // items per page
 
